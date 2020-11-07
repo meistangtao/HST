@@ -8,7 +8,7 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.tangtao.ware</groupId>
+    <groupId>com.tangtao.gulimall</groupId>
     <artifactId>gulimall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall</name>
@@ -16,11 +16,14 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>gulimall-coupin</module>
+        <module>gulimall-coupon</module>
         <module>gulimall-ware</module>
         <module>gulimall-order</module>
         <module>gulimall-portduct</module>
         <module>gulimall-member</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>gulimall-common</module>
     </modules>
 
 </project>
