@@ -8,14 +8,15 @@
         <version>2.1.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.tangtao.ware</groupId>
-    <artifactId>gulimall-ware</artifactId>
+    <groupId>com.tangtao.gulimall</groupId>
+    <artifactId>gulimall-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gulimall-ware</name>
-    <description>Demo project for Spring Boot</description>
+    <name>gulimall-gateway</name>
+    <description>api网关服务</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -24,9 +25,18 @@
             <groupId>com.tangtao.gulimall</groupId>
             <artifactId>gulimall-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,7 +49,21 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

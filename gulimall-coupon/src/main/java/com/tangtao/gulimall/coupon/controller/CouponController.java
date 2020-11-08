@@ -5,12 +5,11 @@ import java.util.Map;
 
 import com.tangtao.gulimall.coupon.entity.CouponEntity;
 import com.tangtao.gulimall.coupon.service.CouponService;
+import com.tangtao.gulimall.utils.ConfPropHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.*;
 
 import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.utils.R;
@@ -24,11 +23,20 @@ import com.tangtao.gulimall.utils.R;
  * @email tangtao@gmail.com
  * @date 2020-11-07 13:57:13
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    /**
+     * 列表
+     */
+    @GetMapping
+    public R list(){
+        return R.ok().put("name", ConfPropHelper.getString("coupon.name-tangtao"));
+    }
 
     /**
      * 列表

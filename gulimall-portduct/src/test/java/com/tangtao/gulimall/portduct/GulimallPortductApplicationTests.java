@@ -3,7 +3,7 @@ package com.tangtao.gulimall.portduct;
 import com.tangtao.gulimall.portduct.service.BrandService;
 import com.tangtao.gulimall.utils.Constant;
 import com.tangtao.gulimall.utils.PageUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;

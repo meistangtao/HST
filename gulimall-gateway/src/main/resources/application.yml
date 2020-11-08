@@ -1,0 +1,15 @@
+server:
+  port: 88
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: test_coupon
+          uri: http://localhost:7000
+          predicates:
+            - Query=uri,coupon
+        - id: test_member
+          uri: http://localhost:8000
+          predicates:
+            - Query=uri,member

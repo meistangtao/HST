@@ -1,10 +1,10 @@
-package com.tangtao.order.lorder;
+package com.tangtao.gulimall.gateway;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GulimallOrderApplicationTests {
+class GulimallGatewayApplicationTests {
 
     @Test
     void contextLoads() {
