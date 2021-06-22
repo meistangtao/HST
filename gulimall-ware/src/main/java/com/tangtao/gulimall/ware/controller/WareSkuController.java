@@ -1,20 +1,16 @@
 package com.tangtao.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
+import com.tangtao.gulimall.ware.entity.WareSkuEntity;
+import com.tangtao.gulimall.ware.service.WareSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.ware.entity.WareSkuEntity;
-import com.tangtao.gulimall.ware.service.WareSkuService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import java.util.Arrays;
 
 
 /**
@@ -22,7 +18,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:06:45
+ * @date 2021-06-22 12:32:36
  */
 @RestController
 @RequestMapping("ware/waresku")
@@ -34,10 +30,10 @@ public class WareSkuController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = wareSkuService.queryPage(params);
+    public R list(@RequestBody WareSkuEntity params){
+        IPage page = wareSkuService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +42,7 @@ public class WareSkuController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		WareSkuEntity wareSku = wareSkuService.getById(id);
-
-        return R.ok().put("wareSku", wareSku);
+        return R.succeed(wareSkuService.getById(id));
     }
 
     /**
@@ -56,9 +50,7 @@ public class WareSkuController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody WareSkuEntity wareSku){
-		wareSkuService.save(wareSku);
-
-        return R.ok();
+        return R.succeed(wareSkuService.save(wareSku));
     }
 
     /**
@@ -66,9 +58,7 @@ public class WareSkuController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody WareSkuEntity wareSku){
-		wareSkuService.updateById(wareSku);
-
-        return R.ok();
+        return R.succeed(wareSkuService.updateById(wareSku));
     }
 
     /**
@@ -76,9 +66,7 @@ public class WareSkuController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		wareSkuService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(wareSkuService.removeByIds(Arrays.asList(ids)));
     }
 
 }

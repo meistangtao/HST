@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.coupon.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.coupon.entity.HomeSubjectSpuEntity;
-
-import java.util.Map;
+import com.tangtao.gulimall.common.param.PageParam;
 
 /**
  * 专题商品
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface HomeSubjectSpuService extends IService<HomeSubjectSpuEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

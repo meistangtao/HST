@@ -1,20 +1,16 @@
 package com.tangtao.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.member.entity.GrowthChangeHistoryEntity;
+import com.tangtao.gulimall.member.service.GrowthChangeHistoryService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.member.entity.GrowthChangeHistoryEntity;
-import com.tangtao.gulimall.member.service.GrowthChangeHistoryService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import java.util.Arrays;
 
 
 /**
@@ -22,7 +18,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:03:01
+ * @date 2021-06-22 11:42:13
  */
 @RestController
 @RequestMapping("member/growthchangehistory")
@@ -34,10 +30,10 @@ public class GrowthChangeHistoryController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = growthChangeHistoryService.queryPage(params);
+    public R list(@RequestBody GrowthChangeHistoryEntity params){
+        IPage page = growthChangeHistoryService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +42,7 @@ public class GrowthChangeHistoryController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		GrowthChangeHistoryEntity growthChangeHistory = growthChangeHistoryService.getById(id);
-
-        return R.ok().put("growthChangeHistory", growthChangeHistory);
+        return R.succeed(growthChangeHistoryService.getById(id));
     }
 
     /**
@@ -56,9 +50,7 @@ public class GrowthChangeHistoryController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody GrowthChangeHistoryEntity growthChangeHistory){
-		growthChangeHistoryService.save(growthChangeHistory);
-
-        return R.ok();
+        return R.succeed(growthChangeHistoryService.save(growthChangeHistory));
     }
 
     /**
@@ -66,9 +58,7 @@ public class GrowthChangeHistoryController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody GrowthChangeHistoryEntity growthChangeHistory){
-		growthChangeHistoryService.updateById(growthChangeHistory);
-
-        return R.ok();
+        return R.succeed(growthChangeHistoryService.updateById(growthChangeHistory));
     }
 
     /**
@@ -76,9 +66,7 @@ public class GrowthChangeHistoryController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		growthChangeHistoryService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(growthChangeHistoryService.removeByIds(Arrays.asList(ids)));
     }
 
 }

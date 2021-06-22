@@ -1,19 +1,15 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.tangtao.gulimall.coupon.entity.CouponHistoryEntity;
+import com.tangtao.gulimall.coupon.service.CouponHistoryService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.coupon.entity.CouponHistoryEntity;
-import com.tangtao.gulimall.coupon.service.CouponHistoryService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
+import java.util.Arrays;
 
 
 
@@ -34,10 +30,9 @@ public class CouponHistoryController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = couponHistoryService.queryPage(params);
+    public R list(@RequestBody CouponHistoryEntity params){
 
-        return R.ok().put("page", page);
+        return R.succeed(couponHistoryService.queryPage(params));
     }
 
 
@@ -48,7 +43,7 @@ public class CouponHistoryController {
     public R info(@PathVariable("id") Long id){
 		CouponHistoryEntity couponHistory = couponHistoryService.getById(id);
 
-        return R.ok().put("couponHistory", couponHistory);
+        return R.succeed(couponHistory);
     }
 
     /**
@@ -56,9 +51,7 @@ public class CouponHistoryController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody CouponHistoryEntity couponHistory){
-		couponHistoryService.save(couponHistory);
-
-        return R.ok();
+        return R.succeed(couponHistoryService.save(couponHistory));
     }
 
     /**
@@ -66,9 +59,7 @@ public class CouponHistoryController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody CouponHistoryEntity couponHistory){
-		couponHistoryService.updateById(couponHistory);
-
-        return R.ok();
+        return R.succeed(couponHistoryService.updateById(couponHistory));
     }
 
     /**
@@ -76,9 +67,8 @@ public class CouponHistoryController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		couponHistoryService.removeByIds(Arrays.asList(ids));
 
-        return R.ok();
+        return R.succeed(couponHistoryService.removeByIds(Arrays.asList(ids)));
     }
 
 }

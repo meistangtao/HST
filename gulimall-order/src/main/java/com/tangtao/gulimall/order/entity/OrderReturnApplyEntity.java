@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.tangtao.gulimall.common.param.PageParam;
 import lombok.Data;
 
 /**
@@ -17,7 +19,7 @@ import lombok.Data;
  */
 @Data
 @TableName("oms_order_return_apply")
-public class OrderReturnApplyEntity implements Serializable {
+public class OrderReturnApplyEntity extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

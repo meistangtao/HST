@@ -1,20 +1,15 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.tangtao.gulimall.coupon.entity.SeckillSessionEntity;
+import com.tangtao.gulimall.coupon.service.SeckillSessionService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.coupon.entity.SeckillSessionEntity;
-import com.tangtao.gulimall.coupon.service.SeckillSessionService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import java.util.Arrays;
 
 
 /**
@@ -34,10 +29,8 @@ public class SeckillSessionController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = seckillSessionService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody SeckillSessionEntity params){
+        return R.succeed(seckillSessionService.queryPage(params));
     }
 
 
@@ -46,9 +39,7 @@ public class SeckillSessionController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SeckillSessionEntity seckillSession = seckillSessionService.getById(id);
-
-        return R.ok().put("seckillSession", seckillSession);
+        return R.succeed(seckillSessionService.getById(id));
     }
 
     /**
@@ -56,9 +47,7 @@ public class SeckillSessionController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody SeckillSessionEntity seckillSession){
-		seckillSessionService.save(seckillSession);
-
-        return R.ok();
+        return R.succeed(seckillSessionService.save(seckillSession));
     }
 
     /**
@@ -66,9 +55,7 @@ public class SeckillSessionController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody SeckillSessionEntity seckillSession){
-		seckillSessionService.updateById(seckillSession);
-
-        return R.ok();
+        return R.succeed(seckillSessionService.updateById(seckillSession));
     }
 
     /**
@@ -76,9 +63,7 @@ public class SeckillSessionController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		seckillSessionService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(seckillSessionService.removeByIds(Arrays.asList(ids)));
     }
 
 }

@@ -1,20 +1,17 @@
 package com.tangtao.gulimall.member.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.member.entity.MemberCollectSubjectEntity;
 import com.tangtao.gulimall.member.service.MemberCollectSubjectService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
@@ -22,7 +19,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:03:01
+ * @date 2021-06-22 11:42:14
  */
 @RestController
 @RequestMapping("member/membercollectsubject")
@@ -34,10 +31,10 @@ public class MemberCollectSubjectController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = memberCollectSubjectService.queryPage(params);
+    public R list(@RequestBody MemberCollectSubjectEntity params){
+        IPage page = memberCollectSubjectService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class MemberCollectSubjectController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		MemberCollectSubjectEntity memberCollectSubject = memberCollectSubjectService.getById(id);
-
-        return R.ok().put("memberCollectSubject", memberCollectSubject);
+        return R.succeed(memberCollectSubjectService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class MemberCollectSubjectController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody MemberCollectSubjectEntity memberCollectSubject){
-		memberCollectSubjectService.save(memberCollectSubject);
-
-        return R.ok();
+        return R.succeed(memberCollectSubjectService.save(memberCollectSubject));
     }
 
     /**
@@ -66,9 +59,7 @@ public class MemberCollectSubjectController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody MemberCollectSubjectEntity memberCollectSubject){
-		memberCollectSubjectService.updateById(memberCollectSubject);
-
-        return R.ok();
+        return R.succeed(memberCollectSubjectService.updateById(memberCollectSubject));
     }
 
     /**
@@ -76,9 +67,7 @@ public class MemberCollectSubjectController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		memberCollectSubjectService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(memberCollectSubjectService.removeByIds(Arrays.asList(ids)));
     }
 
 }

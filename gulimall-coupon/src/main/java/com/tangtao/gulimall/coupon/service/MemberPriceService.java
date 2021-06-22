@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.coupon.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.coupon.entity.MemberPriceEntity;
-
-import java.util.Map;
+import com.tangtao.gulimall.common.param.PageParam;
 
 /**
  * 商品会员价格
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface MemberPriceService extends IService<MemberPriceEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

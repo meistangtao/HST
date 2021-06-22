@@ -1,20 +1,17 @@
 package com.tangtao.gulimall.member.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.member.entity.MemberLoginLogEntity;
 import com.tangtao.gulimall.member.service.MemberLoginLogService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
@@ -22,7 +19,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:03:01
+ * @date 2021-06-22 11:42:13
  */
 @RestController
 @RequestMapping("member/memberloginlog")
@@ -34,10 +31,10 @@ public class MemberLoginLogController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = memberLoginLogService.queryPage(params);
+    public R list(@RequestBody MemberLoginLogEntity params){
+        IPage page = memberLoginLogService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class MemberLoginLogController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		MemberLoginLogEntity memberLoginLog = memberLoginLogService.getById(id);
-
-        return R.ok().put("memberLoginLog", memberLoginLog);
+        return R.succeed(memberLoginLogService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class MemberLoginLogController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody MemberLoginLogEntity memberLoginLog){
-		memberLoginLogService.save(memberLoginLog);
-
-        return R.ok();
+        return R.succeed(memberLoginLogService.save(memberLoginLog));
     }
 
     /**
@@ -66,9 +59,7 @@ public class MemberLoginLogController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody MemberLoginLogEntity memberLoginLog){
-		memberLoginLogService.updateById(memberLoginLog);
-
-        return R.ok();
+        return R.succeed(memberLoginLogService.updateById(memberLoginLog));
     }
 
     /**
@@ -76,9 +67,7 @@ public class MemberLoginLogController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		memberLoginLogService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(memberLoginLogService.removeByIds(Arrays.asList(ids)));
     }
 
 }

@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.member.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.member.entity.MemberLevelEntity;
-
-import java.util.Map;
+import com.tangtao.gulimall.common.param.PageParam;
 
 /**
  * 会员等级
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface MemberLevelService extends IService<MemberLevelEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

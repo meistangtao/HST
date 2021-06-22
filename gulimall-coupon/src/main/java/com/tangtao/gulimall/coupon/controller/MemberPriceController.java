@@ -1,20 +1,15 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.tangtao.gulimall.coupon.entity.MemberPriceEntity;
+import com.tangtao.gulimall.coupon.service.MemberPriceService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.coupon.entity.MemberPriceEntity;
-import com.tangtao.gulimall.coupon.service.MemberPriceService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import java.util.Arrays;
 
 
 /**
@@ -34,10 +29,8 @@ public class MemberPriceController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = memberPriceService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody MemberPriceEntity params){
+        return R.succeed(memberPriceService.queryPage(params));
     }
 
 
@@ -46,9 +39,7 @@ public class MemberPriceController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		MemberPriceEntity memberPrice = memberPriceService.getById(id);
-
-        return R.ok().put("memberPrice", memberPrice);
+        return R.succeed(memberPriceService.getById(id));
     }
 
     /**
@@ -56,9 +47,7 @@ public class MemberPriceController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody MemberPriceEntity memberPrice){
-		memberPriceService.save(memberPrice);
-
-        return R.ok();
+        return R.succeed(memberPriceService.save(memberPrice));
     }
 
     /**
@@ -66,9 +55,7 @@ public class MemberPriceController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody MemberPriceEntity memberPrice){
-		memberPriceService.updateById(memberPrice);
-
-        return R.ok();
+        return R.succeed(memberPriceService.updateById(memberPrice));
     }
 
     /**
@@ -76,9 +63,7 @@ public class MemberPriceController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		memberPriceService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(memberPriceService.removeByIds(Arrays.asList(ids)));
     }
 
 }

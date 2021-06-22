@@ -1,20 +1,17 @@
 package com.tangtao.gulimall.ware.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.ware.entity.WareOrderTaskDetailEntity;
 import com.tangtao.gulimall.ware.service.WareOrderTaskDetailService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
@@ -22,7 +19,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:06:45
+ * @date 2021-06-22 12:32:36
  */
 @RestController
 @RequestMapping("ware/wareordertaskdetail")
@@ -34,10 +31,10 @@ public class WareOrderTaskDetailController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = wareOrderTaskDetailService.queryPage(params);
+    public R list(@RequestBody WareOrderTaskDetailEntity params){
+        IPage page = wareOrderTaskDetailService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class WareOrderTaskDetailController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		WareOrderTaskDetailEntity wareOrderTaskDetail = wareOrderTaskDetailService.getById(id);
-
-        return R.ok().put("wareOrderTaskDetail", wareOrderTaskDetail);
+        return R.succeed(wareOrderTaskDetailService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class WareOrderTaskDetailController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody WareOrderTaskDetailEntity wareOrderTaskDetail){
-		wareOrderTaskDetailService.save(wareOrderTaskDetail);
-
-        return R.ok();
+        return R.succeed(wareOrderTaskDetailService.save(wareOrderTaskDetail));
     }
 
     /**
@@ -66,9 +59,7 @@ public class WareOrderTaskDetailController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody WareOrderTaskDetailEntity wareOrderTaskDetail){
-		wareOrderTaskDetailService.updateById(wareOrderTaskDetail);
-
-        return R.ok();
+        return R.succeed(wareOrderTaskDetailService.updateById(wareOrderTaskDetail));
     }
 
     /**
@@ -76,9 +67,7 @@ public class WareOrderTaskDetailController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		wareOrderTaskDetailService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(wareOrderTaskDetailService.removeByIds(Arrays.asList(ids)));
     }
 
 }

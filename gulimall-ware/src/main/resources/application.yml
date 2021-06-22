@@ -15,3 +15,8 @@
 #      id-type: auto
 #
 #
+
+gulimall:
+  swagger:
+    enable: true
+    controller-package: com.tangtao.gulimall.ware.controller

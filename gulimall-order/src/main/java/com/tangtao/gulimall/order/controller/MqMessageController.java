@@ -1,28 +1,25 @@
 package com.tangtao.gulimall.order.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.order.entity.MqMessageEntity;
 import com.tangtao.gulimall.order.service.MqMessageService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
  * 
  *
- * @author chenshun
+ * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 11:58:28
+ * @date 2021-06-22 11:47:21
  */
 @RestController
 @RequestMapping("order/mqmessage")
@@ -34,10 +31,10 @@ public class MqMessageController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = mqMessageService.queryPage(params);
+    public R list(@RequestBody MqMessageEntity params){
+        IPage page = mqMessageService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class MqMessageController {
      */
     @RequestMapping("/info/{messageId}")
     public R info(@PathVariable("messageId") String messageId){
-		MqMessageEntity mqMessage = mqMessageService.getById(messageId);
-
-        return R.ok().put("mqMessage", mqMessage);
+        return R.succeed(mqMessageService.getById(messageId));
     }
 
     /**
@@ -56,9 +51,7 @@ public class MqMessageController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody MqMessageEntity mqMessage){
-		mqMessageService.save(mqMessage);
-
-        return R.ok();
+        return R.succeed(mqMessageService.save(mqMessage));
     }
 
     /**
@@ -66,9 +59,7 @@ public class MqMessageController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody MqMessageEntity mqMessage){
-		mqMessageService.updateById(mqMessage);
-
-        return R.ok();
+        return R.succeed(mqMessageService.updateById(mqMessage));
     }
 
     /**
@@ -76,9 +67,7 @@ public class MqMessageController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody String[] messageIds){
-		mqMessageService.removeByIds(Arrays.asList(messageIds));
-
-        return R.ok();
+        return R.succeed(mqMessageService.removeByIds(Arrays.asList(messageIds)));
     }
 
 }

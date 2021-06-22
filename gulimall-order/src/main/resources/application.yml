@@ -13,3 +13,8 @@
 #  global-config:
 #    db-config:
 #      id-type: auto
+
+gulimall:
+  swagger:
+    enable: true
+    controller-package: com.tangtao.gulimall.order.controller

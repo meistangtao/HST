@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.ware.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
+import com.tangtao.gulimall.common.param.PageParam;
 import com.tangtao.gulimall.ware.entity.WareSkuEntity;
-
-import java.util.Map;
 
 /**
  * 商品库存
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface WareSkuService extends IService<WareSkuEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

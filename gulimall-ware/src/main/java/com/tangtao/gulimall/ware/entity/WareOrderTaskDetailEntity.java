@@ -2,10 +2,10 @@ package com.tangtao.gulimall.ware.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.tangtao.gulimall.common.param.PageParam;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 库存工作单
@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @TableName("wms_ware_order_task_detail")
-public class WareOrderTaskDetailEntity implements Serializable {
+public class WareOrderTaskDetailEntity  extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

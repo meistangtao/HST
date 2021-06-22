@@ -1,19 +1,15 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.tangtao.gulimall.common.res.R;
+import com.tangtao.gulimall.coupon.entity.SpuBoundsEntity;
+import com.tangtao.gulimall.coupon.service.SpuBoundsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.coupon.entity.SpuBoundsEntity;
-import com.tangtao.gulimall.coupon.service.SpuBoundsService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
+import java.util.Arrays;
 
 
 
@@ -34,10 +30,8 @@ public class SpuBoundsController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = spuBoundsService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody SpuBoundsEntity params){
+        return R.succeed(spuBoundsService.queryPage(params));
     }
 
 
@@ -46,9 +40,8 @@ public class SpuBoundsController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SpuBoundsEntity spuBounds = spuBoundsService.getById(id);
 
-        return R.ok().put("spuBounds", spuBounds);
+        return R.succeed(spuBoundsService.getById(id));
     }
 
     /**
@@ -56,9 +49,7 @@ public class SpuBoundsController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody SpuBoundsEntity spuBounds){
-		spuBoundsService.save(spuBounds);
-
-        return R.ok();
+        return R.succeed(spuBoundsService.save(spuBounds));
     }
 
     /**
@@ -66,9 +57,7 @@ public class SpuBoundsController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody SpuBoundsEntity spuBounds){
-		spuBoundsService.updateById(spuBounds);
-
-        return R.ok();
+        return R.succeed(spuBoundsService.updateById(spuBounds));
     }
 
     /**
@@ -76,9 +65,7 @@ public class SpuBoundsController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		spuBoundsService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(spuBoundsService.removeByIds(Arrays.asList(ids)));
     }
 
 }

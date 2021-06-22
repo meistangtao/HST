@@ -1,20 +1,17 @@
 package com.tangtao.gulimall.ware.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.ware.entity.PurchaseEntity;
 import com.tangtao.gulimall.ware.service.PurchaseService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
@@ -22,7 +19,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:06:45
+ * @date 2021-06-22 12:32:36
  */
 @RestController
 @RequestMapping("ware/purchase")
@@ -34,10 +31,10 @@ public class PurchaseController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = purchaseService.queryPage(params);
+    public R list(@RequestBody PurchaseEntity params){
+        IPage page = purchaseService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class PurchaseController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		PurchaseEntity purchase = purchaseService.getById(id);
-
-        return R.ok().put("purchase", purchase);
+        return R.succeed(purchaseService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class PurchaseController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody PurchaseEntity purchase){
-		purchaseService.save(purchase);
-
-        return R.ok();
+        return R.succeed(purchaseService.save(purchase));
     }
 
     /**
@@ -66,9 +59,7 @@ public class PurchaseController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody PurchaseEntity purchase){
-		purchaseService.updateById(purchase);
-
-        return R.ok();
+        return R.succeed(purchaseService.updateById(purchase));
     }
 
     /**
@@ -76,9 +67,7 @@ public class PurchaseController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		purchaseService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(purchaseService.removeByIds(Arrays.asList(ids)));
     }
 
 }

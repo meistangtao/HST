@@ -2,10 +2,11 @@ package com.tangtao.gulimall.order.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.tangtao.gulimall.common.param.PageParam;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 退货原因
@@ -16,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @TableName("oms_order_return_reason")
-public class OrderReturnReasonEntity implements Serializable {
+public class OrderReturnReasonEntity extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

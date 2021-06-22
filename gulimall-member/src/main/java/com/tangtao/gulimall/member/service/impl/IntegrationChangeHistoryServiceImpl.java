@@ -1,29 +1,27 @@
 package com.tangtao.gulimall.member.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.Query;
-
 import com.tangtao.gulimall.member.dao.IntegrationChangeHistoryDao;
 import com.tangtao.gulimall.member.entity.IntegrationChangeHistoryEntity;
 import com.tangtao.gulimall.member.service.IntegrationChangeHistoryService;
+import com.tangtao.gulimall.common.param.PageParam;
+import com.tangtao.gulimall.common.param.QueryPageHandler;
+import org.springframework.stereotype.Service;
 
 
 @Service("integrationChangeHistoryService")
 public class IntegrationChangeHistoryServiceImpl extends ServiceImpl<IntegrationChangeHistoryDao, IntegrationChangeHistoryEntity> implements IntegrationChangeHistoryService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
+    public IPage queryPage(PageParam params) {
         IPage<IntegrationChangeHistoryEntity> page = this.page(
-                new Query<IntegrationChangeHistoryEntity>().getPage(params),
+                new QueryPageHandler<IntegrationChangeHistoryEntity>().getPage(params),
                 new QueryWrapper<IntegrationChangeHistoryEntity>()
         );
 
-        return new PageUtils(page);
+       return page;
     }
 
 }

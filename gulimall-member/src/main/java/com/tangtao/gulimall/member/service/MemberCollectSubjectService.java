@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.member.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.member.entity.MemberCollectSubjectEntity;
-
-import java.util.Map;
+import com.tangtao.gulimall.common.param.PageParam;
 
 /**
  * 会员收藏的专题活动
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface MemberCollectSubjectService extends IService<MemberCollectSubjectEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

@@ -1,29 +1,27 @@
 package com.tangtao.gulimall.ware.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.Query;
-
+import com.tangtao.gulimall.common.param.PageParam;
+import com.tangtao.gulimall.common.param.QueryPageHandler;
 import com.tangtao.gulimall.ware.dao.WareOrderTaskDao;
 import com.tangtao.gulimall.ware.entity.WareOrderTaskEntity;
 import com.tangtao.gulimall.ware.service.WareOrderTaskService;
+import org.springframework.stereotype.Service;
 
 
 @Service("wareOrderTaskService")
 public class WareOrderTaskServiceImpl extends ServiceImpl<WareOrderTaskDao, WareOrderTaskEntity> implements WareOrderTaskService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
+    public IPage queryPage(PageParam params) {
         IPage<WareOrderTaskEntity> page = this.page(
-                new Query<WareOrderTaskEntity>().getPage(params),
+                new QueryPageHandler<WareOrderTaskEntity>().getPage(params),
                 new QueryWrapper<WareOrderTaskEntity>()
         );
 
-        return new PageUtils(page);
+       return page;
     }
 
 }

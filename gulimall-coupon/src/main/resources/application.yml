@@ -17,6 +17,11 @@ spring:
       discovery:
         server-addr: 129.204.116.186:8848
         namespace: 684890be-730d-448f-9030-d31c41f62bfb
+
+gulimall:
+  swagger:
+    enable: true
+    controller-package: com.tangtao.gulimall.coupon.controller
 #
 #
 #mybatis-plus:

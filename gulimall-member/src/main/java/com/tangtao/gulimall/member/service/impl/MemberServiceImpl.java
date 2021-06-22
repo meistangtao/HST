@@ -1,29 +1,27 @@
 package com.tangtao.gulimall.member.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.Query;
-
 import com.tangtao.gulimall.member.dao.MemberDao;
 import com.tangtao.gulimall.member.entity.MemberEntity;
 import com.tangtao.gulimall.member.service.MemberService;
+import com.tangtao.gulimall.common.param.PageParam;
+import com.tangtao.gulimall.common.param.QueryPageHandler;
+import org.springframework.stereotype.Service;
 
 
 @Service("memberService")
 public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> implements MemberService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
+    public IPage queryPage(PageParam params) {
         IPage<MemberEntity> page = this.page(
-                new Query<MemberEntity>().getPage(params),
+                new QueryPageHandler<MemberEntity>().getPage(params),
                 new QueryWrapper<MemberEntity>()
         );
 
-        return new PageUtils(page);
+       return page;
     }
 
 }

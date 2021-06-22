@@ -1,20 +1,17 @@
 package com.tangtao.gulimall.ware.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.ware.entity.WareInfoEntity;
 import com.tangtao.gulimall.ware.service.WareInfoService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
@@ -22,7 +19,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:06:45
+ * @date 2021-06-22 12:32:36
  */
 @RestController
 @RequestMapping("ware/wareinfo")
@@ -34,10 +31,10 @@ public class WareInfoController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = wareInfoService.queryPage(params);
+    public R list(@RequestBody WareInfoEntity params){
+        IPage page = wareInfoService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class WareInfoController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		WareInfoEntity wareInfo = wareInfoService.getById(id);
-
-        return R.ok().put("wareInfo", wareInfo);
+        return R.succeed(wareInfoService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class WareInfoController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.save(wareInfo);
-
-        return R.ok();
+        return R.succeed(wareInfoService.save(wareInfo));
     }
 
     /**
@@ -66,9 +59,7 @@ public class WareInfoController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.updateById(wareInfo);
-
-        return R.ok();
+        return R.succeed(wareInfoService.updateById(wareInfo));
     }
 
     /**
@@ -76,9 +67,7 @@ public class WareInfoController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		wareInfoService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(wareInfoService.removeByIds(Arrays.asList(ids)));
     }
 
 }

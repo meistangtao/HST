@@ -1,10 +1,9 @@
 package com.tangtao.gulimall.order.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tangtao.gulimall.utils.PageUtils;
 import com.tangtao.gulimall.order.entity.OrderReturnApplyEntity;
-
-import java.util.Map;
+import com.tangtao.gulimall.common.param.PageParam;
 
 /**
  * 订单退货申请
@@ -15,6 +14,6 @@ import java.util.Map;
  */
 public interface OrderReturnApplyService extends IService<OrderReturnApplyEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    IPage queryPage(PageParam pageParam);
 }
 

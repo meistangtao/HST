@@ -1,20 +1,16 @@
 package com.tangtao.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.member.entity.MemberCollectSpuEntity;
+import com.tangtao.gulimall.member.service.MemberCollectSpuService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.member.entity.MemberCollectSpuEntity;
-import com.tangtao.gulimall.member.service.MemberCollectSpuService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import java.util.Arrays;
 
 
 /**
@@ -22,7 +18,7 @@ import com.tangtao.gulimall.utils.R;
  *
  * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 14:03:02
+ * @date 2021-06-22 11:42:14
  */
 @RestController
 @RequestMapping("member/membercollectspu")
@@ -34,10 +30,10 @@ public class MemberCollectSpuController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = memberCollectSpuService.queryPage(params);
+    public R list(@RequestBody MemberCollectSpuEntity params){
+        IPage page = memberCollectSpuService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +42,7 @@ public class MemberCollectSpuController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		MemberCollectSpuEntity memberCollectSpu = memberCollectSpuService.getById(id);
-
-        return R.ok().put("memberCollectSpu", memberCollectSpu);
+        return R.succeed(memberCollectSpuService.getById(id));
     }
 
     /**
@@ -56,9 +50,7 @@ public class MemberCollectSpuController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody MemberCollectSpuEntity memberCollectSpu){
-		memberCollectSpuService.save(memberCollectSpu);
-
-        return R.ok();
+        return R.succeed(memberCollectSpuService.save(memberCollectSpu));
     }
 
     /**
@@ -66,9 +58,7 @@ public class MemberCollectSpuController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody MemberCollectSpuEntity memberCollectSpu){
-		memberCollectSpuService.updateById(memberCollectSpu);
-
-        return R.ok();
+        return R.succeed(memberCollectSpuService.updateById(memberCollectSpu));
     }
 
     /**
@@ -76,9 +66,7 @@ public class MemberCollectSpuController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		memberCollectSpuService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(memberCollectSpuService.removeByIds(Arrays.asList(ids)));
     }
 
 }

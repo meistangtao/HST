@@ -1,29 +1,27 @@
 package com.tangtao.gulimall.coupon.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.Query;
-
 import com.tangtao.gulimall.coupon.dao.CouponDao;
 import com.tangtao.gulimall.coupon.entity.CouponEntity;
 import com.tangtao.gulimall.coupon.service.CouponService;
+import com.tangtao.gulimall.common.param.PageParam;
+import com.tangtao.gulimall.common.param.QueryPageHandler;
+import org.springframework.stereotype.Service;
 
 
 @Service("couponService")
 public class CouponServiceImpl extends ServiceImpl<CouponDao, CouponEntity> implements CouponService {
 
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
+    public IPage queryPage(PageParam pageParam) {
         IPage<CouponEntity> page = this.page(
-                new Query<CouponEntity>().getPage(params),
+                new QueryPageHandler<CouponEntity>().getPage(pageParam),
                 new QueryWrapper<CouponEntity>()
         );
 
-        return new PageUtils(page);
+        return page;
     }
 
 }

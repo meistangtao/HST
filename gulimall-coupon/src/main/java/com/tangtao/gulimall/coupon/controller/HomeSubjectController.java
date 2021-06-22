@@ -1,19 +1,15 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.tangtao.gulimall.coupon.entity.HomeSubjectEntity;
+import com.tangtao.gulimall.coupon.service.HomeSubjectService;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tangtao.gulimall.coupon.entity.HomeSubjectEntity;
-import com.tangtao.gulimall.coupon.service.HomeSubjectService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
+import java.util.Arrays;
 
 
 
@@ -34,10 +30,8 @@ public class HomeSubjectController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = homeSubjectService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody HomeSubjectEntity params){
+        return R.succeed(homeSubjectService.queryPage(params));
     }
 
 
@@ -46,9 +40,7 @@ public class HomeSubjectController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		HomeSubjectEntity homeSubject = homeSubjectService.getById(id);
-
-        return R.ok().put("homeSubject", homeSubject);
+        return R.succeed(homeSubjectService.getById(id));
     }
 
     /**
@@ -56,9 +48,7 @@ public class HomeSubjectController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody HomeSubjectEntity homeSubject){
-		homeSubjectService.save(homeSubject);
-
-        return R.ok();
+        return R.succeed(homeSubjectService.save(homeSubject));
     }
 
     /**
@@ -66,9 +56,7 @@ public class HomeSubjectController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody HomeSubjectEntity homeSubject){
-		homeSubjectService.updateById(homeSubject);
-
-        return R.ok();
+        return R.succeed(homeSubjectService.updateById(homeSubject));
     }
 
     /**
@@ -76,9 +64,7 @@ public class HomeSubjectController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		homeSubjectService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(homeSubjectService.removeByIds(Arrays.asList(ids)));
     }
 
 }

@@ -1,28 +1,25 @@
 package com.tangtao.gulimall.order.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.order.entity.RefundInfoEntity;
 import com.tangtao.gulimall.order.service.RefundInfoService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
  * 退款信息
  *
- * @author chenshun
+ * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 11:58:28
+ * @date 2021-06-22 11:47:20
  */
 @RestController
 @RequestMapping("order/refundinfo")
@@ -34,10 +31,10 @@ public class RefundInfoController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = refundInfoService.queryPage(params);
+    public R list(@RequestBody RefundInfoEntity params){
+        IPage page = refundInfoService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class RefundInfoController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		RefundInfoEntity refundInfo = refundInfoService.getById(id);
-
-        return R.ok().put("refundInfo", refundInfo);
+        return R.succeed(refundInfoService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class RefundInfoController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody RefundInfoEntity refundInfo){
-		refundInfoService.save(refundInfo);
-
-        return R.ok();
+        return R.succeed(refundInfoService.save(refundInfo));
     }
 
     /**
@@ -66,9 +59,7 @@ public class RefundInfoController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody RefundInfoEntity refundInfo){
-		refundInfoService.updateById(refundInfo);
-
-        return R.ok();
+        return R.succeed(refundInfoService.updateById(refundInfo));
     }
 
     /**
@@ -76,9 +67,7 @@ public class RefundInfoController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		refundInfoService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(refundInfoService.removeByIds(Arrays.asList(ids)));
     }
 
 }

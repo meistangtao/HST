@@ -2,10 +2,10 @@ package com.tangtao.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.tangtao.gulimall.common.param.PageParam;
+import lombok.Data;
 
 import java.io.Serializable;
-
-import lombok.Data;
 
 /**
  * 优惠券分类关联
@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @TableName("sms_coupon_spu_category_relation")
-public class CouponSpuCategoryRelationEntity implements Serializable {
+public class CouponSpuCategoryRelationEntity  extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

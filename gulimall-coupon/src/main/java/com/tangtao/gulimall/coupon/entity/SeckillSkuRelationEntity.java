@@ -2,11 +2,11 @@ package com.tangtao.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-
+import com.tangtao.gulimall.common.param.PageParam;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 秒杀活动商品关联
@@ -17,7 +17,7 @@ import lombok.Data;
  */
 @Data
 @TableName("sms_seckill_sku_relation")
-public class SeckillSkuRelationEntity implements Serializable {
+public class SeckillSkuRelationEntity extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

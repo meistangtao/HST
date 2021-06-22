@@ -1,19 +1,18 @@
 package com.tangtao.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
 import com.tangtao.gulimall.coupon.entity.CouponEntity;
 import com.tangtao.gulimall.coupon.service.CouponService;
-import com.tangtao.gulimall.utils.ConfPropHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.tangtao.gulimall.common.env.ConfPropHelper;
+import com.tangtao.gulimall.common.res.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
+import javax.annotation.Resource;
+import java.util.Arrays;
 
 
 /**
@@ -26,67 +25,64 @@ import com.tangtao.gulimall.utils.R;
 @RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
+@Api(value = "coupon/coupon", tags = "优惠券信息")
 public class CouponController {
-    @Autowired
+    @Resource
     private CouponService couponService;
 
     /**
      * 列表
      */
     @GetMapping
+    @ApiOperation(value = "列表", response = R.class)
     public R list(){
-        return R.ok().put("name", ConfPropHelper.getString("coupon.name-tangtao"));
+        return R.succeed(ConfPropHelper.getString("coupon.name-tangtao"));
     }
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = couponService.queryPage(params);
-
-        return R.ok().put("page", page);
+    @PostMapping("/list")
+    @ApiOperation(value = "列表", response = R.class)
+    public R list(@RequestBody @Validated @ApiParam CouponEntity pageParam){
+        return R.succeed(couponService.queryPage(pageParam));
     }
 
 
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		CouponEntity coupon = couponService.getById(id);
-
-        return R.ok().put("coupon", coupon);
+    @GetMapping("/info/{id}")
+    @ApiOperation(value = "信息", response = R.class)
+    public R info(@ApiParam @PathVariable("id") Long id){
+        return R.succeed(couponService.getById(id));
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    public R save(@RequestBody CouponEntity coupon){
-		couponService.save(coupon);
-
-        return R.ok();
+    @PostMapping("/save")
+    @ApiOperation(value = "保存", response = R.class)
+    public R save(@RequestBody @ApiParam CouponEntity coupon){
+        return R.succeed(couponService.save(coupon));
     }
 
     /**
      * 修改
      */
-    @RequestMapping("/update")
-    public R update(@RequestBody CouponEntity coupon){
-		couponService.updateById(coupon);
-
-        return R.ok();
+    @PostMapping("/update")
+    @ApiOperation(value = "修改", response = R.class)
+    public R update(@ApiParam @RequestBody CouponEntity coupon){
+        return R.succeed(couponService.updateById(coupon));
     }
 
     /**
      * 删除
      */
-    @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
-		couponService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+    @DeleteMapping("/delete")
+    @ApiOperation(value = "删除", response = R.class)
+    public R delete(@ApiParam @RequestBody Long[] ids){
+        return R.succeed(couponService.removeByIds(Arrays.asList(ids)));
     }
 
 }

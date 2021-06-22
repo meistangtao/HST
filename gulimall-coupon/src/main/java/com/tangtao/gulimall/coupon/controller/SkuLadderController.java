@@ -1,19 +1,16 @@
 package com.tangtao.gulimall.coupon.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.coupon.entity.SkuLadderEntity;
 import com.tangtao.gulimall.coupon.service.SkuLadderService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
+import com.tangtao.gulimall.common.res.R;
 
 
 
@@ -34,10 +31,8 @@ public class SkuLadderController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = skuLadderService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody SkuLadderEntity params){
+        return R.succeed(skuLadderService.queryPage(params));
     }
 
 
@@ -46,9 +41,7 @@ public class SkuLadderController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SkuLadderEntity skuLadder = skuLadderService.getById(id);
-
-        return R.ok().put("skuLadder", skuLadder);
+        return R.succeed(skuLadderService.getById(id));
     }
 
     /**
@@ -56,9 +49,7 @@ public class SkuLadderController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody SkuLadderEntity skuLadder){
-		skuLadderService.save(skuLadder);
-
-        return R.ok();
+        return R.succeed(skuLadderService.save(skuLadder));
     }
 
     /**
@@ -66,9 +57,7 @@ public class SkuLadderController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody SkuLadderEntity skuLadder){
-		skuLadderService.updateById(skuLadder);
-
-        return R.ok();
+        return R.succeed(skuLadderService.updateById(skuLadder));
     }
 
     /**
@@ -76,9 +65,7 @@ public class SkuLadderController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		skuLadderService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(skuLadderService.removeByIds(Arrays.asList(ids)));
     }
 
 }

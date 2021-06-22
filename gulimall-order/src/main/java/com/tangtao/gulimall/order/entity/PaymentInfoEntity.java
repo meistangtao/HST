@@ -2,11 +2,12 @@ package com.tangtao.gulimall.order.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
+import com.tangtao.gulimall.common.param.PageParam;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 支付信息表
@@ -17,7 +18,7 @@ import lombok.Data;
  */
 @Data
 @TableName("oms_payment_info")
-public class PaymentInfoEntity implements Serializable {
+public class PaymentInfoEntity extends PageParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

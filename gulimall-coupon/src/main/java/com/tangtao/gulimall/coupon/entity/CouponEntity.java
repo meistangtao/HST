@@ -2,11 +2,12 @@ package com.tangtao.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
+import com.tangtao.gulimall.common.param.PageParam;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 优惠券信息
@@ -17,7 +18,7 @@ import lombok.Data;
  */
 @Data
 @TableName("sms_coupon")
-public class CouponEntity implements Serializable {
+public class CouponEntity extends PageParam implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	/**

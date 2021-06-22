@@ -1,19 +1,16 @@
 package com.tangtao.gulimall.coupon.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.coupon.entity.SeckillSkuRelationEntity;
 import com.tangtao.gulimall.coupon.service.SeckillSkuRelationService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
+import com.tangtao.gulimall.common.res.R;
 
 
 
@@ -34,10 +31,8 @@ public class SeckillSkuRelationController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = seckillSkuRelationService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody SeckillSkuRelationEntity params){
+        return R.succeed(seckillSkuRelationService.queryPage(params));
     }
 
 
@@ -46,9 +41,7 @@ public class SeckillSkuRelationController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SeckillSkuRelationEntity seckillSkuRelation = seckillSkuRelationService.getById(id);
-
-        return R.ok().put("seckillSkuRelation", seckillSkuRelation);
+        return R.succeed(seckillSkuRelationService.getById(id));
     }
 
     /**
@@ -56,9 +49,7 @@ public class SeckillSkuRelationController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
-		seckillSkuRelationService.save(seckillSkuRelation);
-
-        return R.ok();
+        return R.succeed(seckillSkuRelationService.save(seckillSkuRelation));
     }
 
     /**
@@ -66,9 +57,7 @@ public class SeckillSkuRelationController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
-		seckillSkuRelationService.updateById(seckillSkuRelation);
-
-        return R.ok();
+        return R.succeed(seckillSkuRelationService.updateById(seckillSkuRelation));
     }
 
     /**
@@ -76,9 +65,7 @@ public class SeckillSkuRelationController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		seckillSkuRelationService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(seckillSkuRelationService.removeByIds(Arrays.asList(ids)));
     }
 
 }

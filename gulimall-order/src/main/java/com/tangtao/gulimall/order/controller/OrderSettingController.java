@@ -1,28 +1,25 @@
 package com.tangtao.gulimall.order.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tangtao.gulimall.common.res.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tangtao.gulimall.order.entity.OrderSettingEntity;
 import com.tangtao.gulimall.order.service.OrderSettingService;
-import com.tangtao.gulimall.utils.PageUtils;
-import com.tangtao.gulimall.utils.R;
-
 
 
 /**
  * 订单配置信息
  *
- * @author chenshun
+ * @author tangtao
  * @email tangtao@gmail.com
- * @date 2020-11-07 11:58:27
+ * @date 2021-06-22 11:47:20
  */
 @RestController
 @RequestMapping("order/ordersetting")
@@ -34,10 +31,10 @@ public class OrderSettingController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = orderSettingService.queryPage(params);
+    public R list(@RequestBody OrderSettingEntity params){
+        IPage page = orderSettingService.queryPage(params);
 
-        return R.ok().put("page", page);
+        return R.succeed(page);
     }
 
 
@@ -46,9 +43,7 @@ public class OrderSettingController {
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		OrderSettingEntity orderSetting = orderSettingService.getById(id);
-
-        return R.ok().put("orderSetting", orderSetting);
+        return R.succeed(orderSettingService.getById(id));
     }
 
     /**
@@ -56,9 +51,7 @@ public class OrderSettingController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody OrderSettingEntity orderSetting){
-		orderSettingService.save(orderSetting);
-
-        return R.ok();
+        return R.succeed(orderSettingService.save(orderSetting));
     }
 
     /**
@@ -66,9 +59,7 @@ public class OrderSettingController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody OrderSettingEntity orderSetting){
-		orderSettingService.updateById(orderSetting);
-
-        return R.ok();
+        return R.succeed(orderSettingService.updateById(orderSetting));
     }
 
     /**
@@ -76,9 +67,7 @@ public class OrderSettingController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		orderSettingService.removeByIds(Arrays.asList(ids));
-
-        return R.ok();
+        return R.succeed(orderSettingService.removeByIds(Arrays.asList(ids)));
     }
 
 }
