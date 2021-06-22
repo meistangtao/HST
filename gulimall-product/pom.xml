@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tangtao.gulimall</groupId>
-    <artifactId>gulimall-porduct</artifactId>
+    <artifactId>gulimall-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gulimall-porduct</name>
+    <name>gulimall-product</name>
     <description>商品服务</description>
 
     <properties>
